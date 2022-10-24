@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Arbres extends Productos {
 	
@@ -12,6 +13,5 @@ public class Arbres extends Productos {
 	public String toString() {
 		return "Arbres [height=" + height + Producto() + "]";
 	}
-	
 
 }

@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Flores extends Productos{
 	
@@ -12,6 +13,5 @@ public class Flores extends Productos{
 	public String toString() {
 		return "Flores [color=" + color + Producto() + "]";
 	}
-	
-	
+
 }

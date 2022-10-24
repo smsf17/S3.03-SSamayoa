@@ -1,7 +1,7 @@
+package Modelo;
 
 public class Productos {
-	
-	private static int idProducto = 1;
+private static int idProducto = 1;
 	
 	private int id;
 	private String nameProduct;
@@ -63,11 +63,5 @@ public class Productos {
 		return "Productos [id=" + id + ", nameProduct=" + nameProduct + ", price for Sale=" + priceSale + ", price we Buy="
 				+ priceBuy + cantidad + "]";
 	}
-
-
-	
-	
-	
-	
 
 }

@@ -1,10 +1,17 @@
+package Controller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Modelo.Arbres;
+import Modelo.Decoracio;
+import Modelo.Flores;
+import Modelo.Productos;
+
 public class Store implements Operation {
-	
-	protected List<Productos> products = new ArrayList<Productos>();
+
+protected List<Productos> products = new ArrayList<Productos>();
 	
 	@Override
 	public void purchase() {
@@ -106,6 +113,5 @@ public class Store implements Operation {
 			System.out.println(prod.toString());
 		
 	}
-
 
 }
