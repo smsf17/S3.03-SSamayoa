@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Productos {
+public class Producto {
 private static int idProducto = 1;
 	
 	private int id;
@@ -9,7 +9,7 @@ private static int idProducto = 1;
 	private double priceBuy;
 	private int cantidad;
 	
-	public Productos(int id, String nameProduct, double priceSale, double priceBuy, int cantidad) {
+	public Producto(int id, String nameProduct, double priceSale, double priceBuy, int cantidad) {
 		
 		this.id = idProducto++;
 		this.nameProduct = nameProduct;
@@ -57,6 +57,14 @@ private static int idProducto = 1;
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	
+	public void restarCantidad(int cantidadSolicitada) {
+		this.cantidad -= cantidadSolicitada;
+	}
+	
+	public void sumarCantidad(int nuevaCantidad) {
+		this.cantidad += nuevaCantidad;
 	}
 
 	public String Producto() {

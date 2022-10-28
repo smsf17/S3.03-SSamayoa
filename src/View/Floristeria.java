@@ -24,7 +24,7 @@ public class Floristeria {
 			if (opcion == 1) {
 				tienda.purchase();
 			}else if (opcion == 2) {
-				tienda.sale(opcion, opcion);
+				tienda.sale();
 			}else if (opcion == 3) {
 				tienda.sumaStock();
 			}else if (opcion == 4) {

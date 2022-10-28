@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Modelo.Arbres;
+import Modelo.Arbre;
 import Modelo.Decoracio;
-import Modelo.Flores;
-import Modelo.Productos;
+import Modelo.Flor;
+import Modelo.Producto;
 
 public class Store implements Operation {
 
-protected List<Productos> products = new ArrayList<Productos>();
+protected List<Producto> products = new ArrayList<Producto>();
 	
 	@Override
 	public void purchase() {
@@ -19,19 +19,19 @@ protected List<Productos> products = new ArrayList<Productos>();
         System.out.println("Introduzca el id del producto: ");
         int idSolicitado = scn.nextInt();
         int opcion = 0;
-        Productos solicitada = null;
+        Producto solicitada = null;
         
-        for (Productos prod: products)
+        for (Producto prod: products)
         
         if (prod.getId() == idSolicitado)
 			solicitada = prod;
         	if (solicitada != null){
         	System.out.println("Cuantos nuevos productos agrega: ");
         	int nuevacantidad = scn.nextInt();
-        	solicitada.setCantidad(nuevacantidad);
+        	solicitada.sumarCantidad(nuevacantidad);
         }else {
-        	System.out.println("Id producto: ");
-            int nuevoId = scn.nextInt();
+        	System.out.println("Id producto: " + idSolicitado);
+            int nuevoId = idSolicitado;
             System.out.println("Nombre del producto: ");
             String nombre = scn.nextLine();
             System.out.println("Precio de venta: ");
@@ -51,17 +51,18 @@ protected List<Productos> products = new ArrayList<Productos>();
            switch(opcion){
            		case 1: System.out.println("Introduzca el color de la flor: ");
            				String nColor = scn.nextLine();
-           				Productos flor = new Flores(nuevoId, nombre, pVenta, pCompra, ncantidad, nColor);
+           				Producto flor = new Flor(nuevoId, nombre, pVenta, pCompra, ncantidad, nColor);
            				products.add(flor);
+           				System.out.println("Cuantos productos se han comprado: ");
                         break;
                 case 2: System.out.println("Introduzca el tamaño del arbol: ");
    						double nTamano = scn.nextDouble();
-   						Productos arbol = new Arbres(nuevoId, nombre, pVenta, pCompra, ncantidad, nTamano);
+   						Producto arbol = new Arbre(nuevoId, nombre, pVenta, pCompra, ncantidad, nTamano);
    						products.add(arbol);
    						break;
                 case 3: System.out.println("Introduzca el material (Plastic / Fusta): ");
                 		String nmaterial = scn.nextLine();
-   						Productos decoracion = new Decoracio(nuevoId, nombre, pVenta, pCompra, ncantidad, nmaterial);
+   						Producto decoracion = new Decoracio(nuevoId, nombre, pVenta, pCompra, ncantidad, nmaterial);
    						products.add(decoracion);
 						break;
            }
@@ -69,11 +70,16 @@ protected List<Productos> products = new ArrayList<Productos>();
 	}
 
 	@Override
-	public void sale(int id, int cantidad) {
-		Productos solicitada = null;
-		int idSolicitado = id;
-		int cantidadSolicitada = cantidad;
-		for (Productos prod:products) 
+	public void sale() {
+		Scanner scn = new Scanner(System.in);
+		Producto solicitada = null;
+		
+		System.out.println ("Id de producto solicitado: ");
+		int idSolicitado = scn.nextInt();
+		System.out.println ("Cantidad producto solicitado: ");
+		int cantidadSolicitada = scn.nextInt();
+		
+		for (Producto prod:products) 
 			if (prod.getId()== idSolicitado)
 				solicitada = prod;
 		if (solicitada == null)
@@ -82,15 +88,16 @@ protected List<Productos> products = new ArrayList<Productos>();
 			if (solicitada.getCantidad()>= cantidadSolicitada) {
 				System.out.println("id producto: " + solicitada.getId() + " " + solicitada.getNameProduct() + " precio unitario: "
 					+ solicitada.getPriceSale() + "€  Cantidad compra: " + cantidadSolicitada + " Total compra " + solicitada.getPriceSale()*cantidadSolicitada + "€");
+					solicitada.restarCantidad(cantidadSolicitada);
 			}
 			else if (solicitada.getCantidad()== 0) {
-				System.out.println("No hya disponibilidad del producto.");
+				System.out.println("No hay disponibilidad del producto.");
 				}
 			else {
 				double importeVenta = solicitada.getPriceSale() * solicitada.getCantidad();
 				System.out.println("No hay existencias suficientes para la cantidad solicitada");
 				System.out.println("Disponemos de:" + solicitada.getCantidad() + " unidades y seria un total de: " + importeVenta);
-				solicitada.setCantidad(cantidadSolicitada);
+					solicitada.restarCantidad(cantidadSolicitada);
 				}
 				
 		}
@@ -100,7 +107,7 @@ protected List<Productos> products = new ArrayList<Productos>();
 	@Override
 	public void sumaStock() {
 		double total = 0d;
-		for (Productos prod:products) 
+		for (Producto prod:products) 
 			total += prod.getPriceBuy() * prod.getCantidad();
 		
 		System.out.println("El total en almacen es de: " +total + "€");
@@ -109,7 +116,7 @@ protected List<Productos> products = new ArrayList<Productos>();
 
 	@Override
 	public void imprimirStock() {
-		for (Productos prod:products) 
+		for (Producto prod:products) 
 			System.out.println(prod.toString());
 		
 	}

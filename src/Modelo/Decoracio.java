@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Decoracio extends Productos{
+public class Decoracio extends Producto{
 	
 	/*public enum Material{
 		Plastic, Fusta
